@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
+    <link rel="stylesheet" href="{% static 'wall/css/bootstrap.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{% static 'wall/js/parallax.min.js' %}"></script>
+
+</head>
+
+<body>
+
+    <!-- Login Navbar -->
+    <nav class=" navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
+        <h4 class='text-white'>CardSense</h4>
+        <div class="container">
+            <p class='text-light'>{{ message }}</p>
+            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                <li class="dropdown order-1">
+                    <button type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        class="btn btn-outline-secondary dropdown-toggle text-white">Login <span
+                            class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right mt-2">
+                        <li class="px-3 py-2">
+                            <form class="form" action='/login_valid' method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input id="emailInput" placeholder="Email" class="form-control form-control-sm"
+                                        type="text" name='email'>
+                                </div>
+                                <div class="form-group">
+                                    <input id="passwordInput3" placeholder="Password"
+                                        class="form-control form-control-sm" type="password" name='password'>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                </div>
+                                <div class="form-group text-center">
+                                    <small><a href="#" data-toggle="modal" data-target="#modalPassword">Forgot
+                                            password?</a></small>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Login NavBar -->
+
+    <div class='parallax-window' data-parallax="scroll" data-image-src="{% static 'wall/css/computer.jpg' %}" >
+        <div class="row justify-content-center">
+            <h1 class="text-center mt-10 p-5 text-white">
+                Business Name
+            </h1>
+        </div>
+    </div>
+
+
+
+    <div class='container p-6 m-3 py-3'>
+        <div class='row align-items-center'>
+            <div class='col-5'>
+                <div class='text-center border rounded border-secondary p-5'>
+                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
+                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
+                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
+                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
+                </div>
+            </div>
+            <div class='col-7 businessimg text-center'>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Registration -->
+    <div class='parallax2'>
+
+    </div>
+    <div class='parallax2'>
+        <div class='container mt-5 justify-content'>
+            <div id='login_mobile' class='col-lg-6 col-sm-4 p-3 border border-secondary rounded offset-7'>
+                <h3 class='text-white'>Sign Up Now</h3>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger">{{ message }}</li>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="container">
+                        <form action='/create' method='POST'>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control-sm" name='first_name'
+                                        placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control-sm" name='last_name' placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control-sm" name='email' placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <!-- <input type="tel" class="form-control-sm" name='phone' placeholder="(012)345-6789"> -->
+                                    <input type="text" class="form-control-sm bfh-phone" placeholder="Phone Number">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control-sm" name='birthday' placeholder="Birthday">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control-sm" name='password'
+                                        placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control-sm" name='password_confirm'
+                                        placeholder="Confirm Password">
+                                </div>
+                            </div>
+                            <a href='#'><button class='btn btn-primary btn-sm'>Create Account</button></a>
+                        </form>
+                    </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+    <!-- Registration -->
+
+
+
+
+
+
+
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>

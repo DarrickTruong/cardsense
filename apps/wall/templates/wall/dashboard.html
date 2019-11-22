@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> {{user.first_name}}'s Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>   
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+</head>
+
+<body>
+
+    <nav class=" navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+        <a class=" navbar-brand" href="/">CardSense</a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="  collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class=" navbar-nav">
+                   
+                    <li class="nav-item active">
+                        <a href='/wall/{{user.id}}' class='nav-link btn-margin-left btn btn-sm btn-light text-secondary'> Your Wall</a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a href='/edit_contact' class='nav-link btn-margin-left btn btn-sm btn-secondary text-white'> Edit Contact Info</a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a href='/logout' class='nav-link btn-margin-left btn btn-sm btn-secondary text-white'> Logout</a>
+                    </li>
+                    
+                </ul>
+                    
+                    
+
+            </div>
+
+    </nav>
+
+
+
+    <div class='container mt-5'>
+        <!-- Messages -->
+        <h5> Messages </h5>
+        <div class='screenscroll'>
+            <table class='table table-sm table-striped table-active'>
+                <thead class='thead-dark'>
+                    <tr>
+                        <th> Name </th>
+                        <th> Phone </th>
+                        <th> Message </th>
+                        <th> Respond </th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                {% for message in my_messages %}
+                <tr>
+                    <td>
+                        <p> {{message.author.first_name}} {{message.author.last_name}} </p>
+                    </td>
+                    <td>
+                        <p> {{message.author.phone}} </p>
+                    </td>
+                    <td>
+                        <p> {{message.message}} </p>
+                    </td>
+                    <td>
+                        <form action='/comment/{{message.id}}' method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea class="form-control"  rows="3" name='comment'>  </textarea>
+                            </div>
+                            <input type='submit' class='btn-sm btn btn-primary'>
+                        </form>
+                    </td>
+                    <td>
+                        <a href='/pin_message/{{message.id}}' class='btn btn-sm btn-outline-warning'>Pin</a>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+
+        <div class='line_divider'></div>
+        <!-- Events -->
+        <div class="container">
+            <div class='row justify-content-around'>
+                <div class='col-lg-6'>
+                    <h5> Create an Event </h5>
+                    {% if messages %}
+                    {% for message in messages %}
+                            <p class="text-danger">{{ message }}</li>
+                        {% endfor %}
+                        {% endif %}
+
+                        <form action='/process_event' enctype="multipart/form-data" method='POST'>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> What: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name='what'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Where: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name='where'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> When: </label>
+                                <div class="col-sm-9">
+                                    <input type='date' id='datepicker' class="form-control" name='when'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Why: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name='why'>
+                                </div>
+                            </div>
+                            <div class='form-group row'>
+                                <label class="col-sm-3 col-form-label"> Event Pic: </label>
+                                <div class="col-sm-9 input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                            aria-describedby="inputGroupFileAddon01" name='event_pic'>
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <input type='hidden' name="owner_id" value={{user.id}}>
+                            <input type='submit' class='btn btn-outline-primary btn-sm'>
+                        </form>
+                </div>
+
+                <div class='col-lg-6'>
+                    <h5> My Events</h5>
+                    <div class='screenscroll'>
+                        {% for event in events %}
+                        <table class='table table-sm table-striped'>
+                            <tr>
+                                <th> What: </th>
+                                <td> {{event.what}} </td>
+                            </tr>
+                            <tr>
+                                <th> When: </th>
+                                <td> {{event.when}} </td>
+                            </tr>
+                            <tr>
+                                <th> Where: </th>
+                                <td> {{event.where}} </td>
+                            </tr>
+                            <tr>
+                                <th> Why: </th>
+                                <td> {{event.why}} </td>
+                            </tr>
+                            <tr>
+                                <th> Event Pic: </th>
+                                <td> <img src="{{event.event_pic.url}}" alt='event picture' width='200px'> </td>
+                            </tr>
+                        </table>
+                        <a href='/edit_event/{{event.id}}' class='btn btn-outline-primary btn-sm'>Edit</a>
+                        <a href='/destroy_event/{{event.id}}' class='btn btn-outline-danger btn-sm'>Delete</a>
+                        <div class='line_divider'></div>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class='line_divider'></div>
+
+    <!-- Leads and Loyalty -->
+    <div class='container'>
+
+        <div class='row justify-content-between'>
+
+            <div class='col-lg-6 screenscroll'>
+                <h5> Leads </h5>
+                <table class='table table-sm table-striped table-active table-responsive'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th> Name </th>
+                            <th> Phone </th>
+                            <th> Email </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    {% for lead in leads %}
+                    <tr>
+                        <td>
+                            <p class='text-sm'> {{lead.first_name}} {{lead.last_name}} </p>
+                        </td>
+                        <td>
+                            <p> {{lead.phone}} </p>
+                        </td>
+                        <td>
+                            <p> {{lead.email}} </p>
+                        </td>
+                        <td>
+                            <form action='/convert_lead' method="POST">
+                                {% csrf_token %}
+                                <input type='hidden' name='lead_id' value={{lead.id}}>
+                                <input type='submit' class='btn btn-outline-success btn-sm' value='Convert'>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class='col-lg-6 screenscroll'>
+                <h5> Loyalty </h5>
+                <table class='table table-sm table-striped table-active'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th> Name </th>
+                            <th> Phone </th>
+                            <th> Email </th>
+                        </tr>
+                    </thead>
+                    {% for loyal in loyalty %}
+                    <tr>
+                        <td>
+                            <p> {{loyal.first_name}} {{loyalty.last_name}} </p>
+                        </td>
+                        <td>
+                            <p> {{loyal.phone}} </p>
+                        </td>
+                        <td>
+                            <p> {{loyal.email}} </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class='line_divider'></div>
+
+
+
+
+    <!-- Reviews -->
+    <div class='container'>
+        <h5> Reviews </h5>
+        <div class='screenscroll'>
+
+            <table class='table table-sm table-striped table-active'>
+                <thead class='thead-dark'>
+                    <tr>
+                        <th> Name </th>
+                        <th> Phone </th>
+                        <th> Review </th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                {% for review in reviews %}
+                <tr>
+                    <td>
+                        <p> {{review.author.first_name}} {{review.author.last_name}} </p>
+                    </td>
+                    <td>
+                        <p> {{review.author.phone}} </p>
+                    </td>
+                    <td>
+                        <p> {{review.review}} </p>
+                    </td>
+                    <td>
+                        <form action='destroy_review' method="POST">
+                            {% csrf_token %}
+                            <input type='hidden' name='review_id' value={{review.id}}>
+                            <input type='submit' class='btn btn-outline-danger btn-sm' value='Delete'>
+                        </form>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+</body>
+
+</html>

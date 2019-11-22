@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leave a Message</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>   
+
+</head>
+<body>
+    <navbar class="navbar bg-primary">
+        <h6 class="text-white"> Leave {{ user.first_name }} a message </h6>
+        <a href='/wall/{{user.id}}' class='text-white'>Go Back</a>
+    </navbar>
+
+
+    <!-- Form -->
+    <div class='wrapper'>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="text-danger">{{ message }}</li>
+                {% endfor %}
+        {% endif %}
+        <form action="/process_message" method='POST'> 
+        <div class="form-group row">
+            {% csrf_token %}
+            <label for="staticEmail" class="col-sm-2 col-form-label">First name</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" name='first_name'>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Last name</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" name='last_name'>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="staticEmail" placeholder="email@example.com" name='email'>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="(012)345-6789" name='phone'>
+            </div>
+        </div>
+            <div class="form-group">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message" placeholder="Write a message, ask a question, or just say hi!"></textarea>
+            </div>
+        <input type="submit" class='btn btn-primary btn-sm'>
+        </form>
+    </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{user.first_name}}'s Wall</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <nav class=" navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+        <a class=" navbar-brand" href="/">CardSense</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="  collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class=" navbar-nav">
+                   
+                    <li class="nav-item active">
+                        <a href='/write_message/{{user.id}}' class='nav-link btn btn-light text-secondary'> Message
+                            {{user.first_name}}</a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a href='/write_review/{{user.id}}' class=' nav-link text-secondary btn btn-light'> Write a
+                            review</a>
+                    </li>
+                     {% if id == session_id.user_id  %}
+                    <li>
+                        <a href='/dashboard' class='nav-link btn btn-secondary text-white'> Back to dashboard </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+    </nav>
+
+
+
+
+
+
+
+
+    <!-- USER CONTACT INFO COLUMN-->
+
+    <div class="mt-5 row justify-content-around">
+        <div class='col-lg-6 text-center'>
+            <img class='mt-5 oval img-fluid' src="{{profile_pic}}" alt="{{user.first_name}} profile pic" width='300px'>
+
+            <table class='table table-striped'>
+                <tr>
+                    <td>
+                        <h4>{{user.first_name}} {{user.last_name}} </h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td> {{user.phone}} </td>
+                </tr>
+                <tr>
+                    <td> {{user.email}} </td>
+                </tr>
+                <tr>
+                    <td> <a href='https://{{user.website}}'> {{user.website}} </a></td>
+                </tr>
+            </table>
+
+            <!-- Social Buttons -->
+
+            <div class='container text-center'>
+
+                <a href='https://www.linkedin.com/in/{{user.linkedin}}' class='btn btn-primary text-white block'>
+                    <img class='logo' src="{% static 'wall/images/linkedin.png' %}" alt='linkedin logo'>
+                    <p class='logo_btn row_inline_block logo_font'>Linkedin</p>
+                </a>
+                <a href='https://www.facebook.com/{{user.facebook}}' class='btn btn-primary text-white block'>
+                    <img class='logo' src="{% static 'wall/images/facebook.png' %}" alt='facebook logo'>
+                    <p class='logo_btn row_inline_block logo_font'>facebook</p>
+                </a>
+                <a href='https://www.instagram.com/{{user.instagram}}' class='btn btn-primary text-white block'>
+                    <img class='logo' src="{% static 'wall/images/instagram.png' %}" alt='linkedin logo'>
+                    <p class='logo_btn row_inline_block logo_font'>instagram</p>
+                </a>
+                <a href='https://www.linkedin.com/in/{{user.linkedin}}' class='btn btn-primary text-white block'>
+                    <img class='logo' src="{% static 'wall/images/google.png' %}" alt='linkedin logo'>
+                    <p class='logo_btn row_inline_block logo_font'>google</p>
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- EVENTS COLUMN -->
+        <div class='col-lg-6'>
+            <div class="mt-5 container">
+                <h5> Events </h5>
+                <div class='container'>
+                    <div class='screenscroll_tall'>
+                        {% for event in events %}
+
+                        <table class='table table-sm'>
+                            <tr>
+                                <th> What: </th>
+                                <td> {{event.what}} </td>
+                            </tr>
+                            <tr>
+                                <th> When: </th>
+                                <td> {{event.when}} </td>
+                            </tr>
+                            <tr>
+                                <th> Where: </th>
+                                <td> {{event.where}} </td>
+                            </tr>
+                            <tr>
+                                <th> Why: </th>
+                                <td> {{event.why}} </td>
+                            </tr>
+                        </table>
+                        <img src="{{event.event_pic.url}}" alt='event pic' width=90%>
+
+                        <div class='line_divider'></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- Reviews, Messsages -->
+    <div class='divider'></div>
+    <div class='container p-4'>
+
+        <!-- Reviews -->
+        <h5 class='offset-1'> Reviews </h5>
+        <div class='wrapper screenscroll_tall'>
+
+            {% for review in reviews reversed %}
+            <h6 class='row_inline_block'> {{review.author.first_name}} {{review.author.last_name}} </h6>
+            <p class='row_inline_block'> {{review.created_at}} </p>
+            <p> {{review.review}}</p>
+            <div class='comments'>
+                <h6 class='row_inline_block'> {{user.first_name}} {{user.last_name}} </h6>
+                <p class='row_inline_block'> "Thank you for your review!" </p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class='line_divider'></div>
+
+        <div>
+            <h5> Pinned Messages </h5>
+            {% for pinned in user_messages %}
+            <div>
+                <img class='row_inline_block' src="{% static 'wall/images/push-pin.png' %}" alt='push pin' height='20px'
+                    width="20px">
+                <p class='row_inline_block'> {{pinned.author.first_name}}: {{pinned.message}} </p>
+
+                {% for comment in user_messages.written_comment.all %}
+                <p> {{comment.author.first_name}} </p>
+                <p> {{comment.comment}} </p>
+                {% endfor %}
+
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

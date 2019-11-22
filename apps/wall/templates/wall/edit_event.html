@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Event</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>   
+
+</head>
+
+<body>
+    <navbar class="navbar bg-primary">
+        <h6 class="text-white"> Edit Your Event Details </h6>
+        <a href='/dashboard' class='text-white'>Go Back</a>
+    </navbar>
+
+
+    <!-- Form -->
+    <div class='wrapper'>
+        <h5> Edit Event Details</h5>
+        {% if messages %}
+        {% for message in messages %}
+                <p class="text-danger"> {{ message }} </li>
+                {% endfor %}
+            {% endif %}
+            <form action="/process_edit_event/{{event.id}}"  method='POST'>
+                <div class="form-group row">
+                    {% csrf_token %}
+                    <label for="staticEmail" class="col-sm-2 col-form-label">What:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="{{event.what}}" name='what'>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">When:</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" value="{{when}}" name='when'>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Where:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="{{event.where}}" name='where'>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Why:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="{{event.why}}" name='why'>
+                    </div>
+                </div>
+
+                <input type="submit" class='btn btn-primary btn-sm'>
+            </form>
+    </div>
+
+   
+
+
+
+
+
+    <div class='wrapper'>
+        <h5> Update Profile Picture</h5>
+        <form action='/update_event_pic/{{event.id}}' enctype="multipart/form-data" method='POST'>
+            {% csrf_token %}
+            <div class='form-group row'>
+                <label class="col-sm-2 col-form-label"> Event Pic: </label>
+                <div class="col-sm-10 input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                            aria-describedby="inputGroupFileAddon01" name='event_pic' required>
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+            </div>
+            <input type='submit' class='btn btn-primary btn-sm'>
+        </form>
+
+
+    </div>
+
+
+</body>
+
+</html>
