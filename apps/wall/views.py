@@ -25,8 +25,8 @@ def dashboard(request):
 
 def thewall(request, user_id):
     user = User.objects.get(id=user_id)
-    print("user messages", user.written_message.all())
-    print("user pinned messages", user.written_message.filter(pinned=True))
+    # print("user messages", user.written_message.all())
+    # print("user pinned messages", user.written_message.filter(pinned=True))
     context = {
         'user' : user,
         'id' : user.id,
@@ -86,9 +86,9 @@ def write_message(request, user_id):
     }
     return render(request, "wall/write_message.html", context)
 
-def process_message(request):
+def process_message(request, user_id):
 
-    print('in process message')
+    # print('in process message', user_id)
     errors = Lead.objects.validate(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
@@ -96,12 +96,12 @@ def process_message(request):
         return redirect('/write_message')
     all_leads =Lead.objects.all()
     if len(all_leads.filter(email=request.POST['email'])) > 0:
-        Message.objects.create(message=request.POST['message'], user_message=User.objects.get(id=request.session['user_id']), author=Lead.objects.get(email=request.POST['email']))
-        return('/wall/' + str(request.session['user_id']))
+        Message.objects.create(message=request.POST['message'], user_message=User.objects.get(id=user_id), author=Lead.objects.get(email=request.POST['email']))
+        return('/wall/' + str(user_id))
     else:
-        lead = Lead.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], phone= request.POST['phone'], owner=User.objects.get(id=request.session['user_id']))
-        Message.objects.create(message=request.POST['message'], user_messaged=User.objects.get(id=request.session['user_id']), author=lead)
-    return redirect('/wall/' + str(request.session['user_id']))
+        lead = Lead.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], phone= request.POST['phone'], owner=User.objects.get(id=user_id))
+        Message.objects.create(message=request.POST['message'], user_messaged=User.objects.get(id=user_id), author=lead)
+    return redirect('/wall/' + str(user_id))
 
 def comment(request, message_id):
     Comment.objects.create(comment=request.POST['comment'], author=User.objects.get(id=request.session['user_id']), message=Message.objects.get(id=message_id))
@@ -109,16 +109,21 @@ def comment(request, message_id):
 
 def pin_message(request, message_id):
     message = Message.objects.get(id=message_id)
-    print('in ROUTE pinned message', message)
     message.pinned = True
     message.save()
-    print('message pinned True', message.pinned)
+    return redirect('/dashboard')
+
+def unpin_message(request, message_id):
+    message = Message.objects.get(id=message_id)
+    message.pinned = False
+    message.save()
+    # print('message pinned True', message.pinned)
     return redirect('/dashboard')
     
 
 def convert_lead(request):
     lead = Lead.objects.get(id=request.POST['lead_id'])
-    print('this is lead first_name', lead.first_name)
+    # print('this is lead first_name', lead.first_name)
     first_name = lead.first_name
     last_name = lead.last_name
     email = lead.email
@@ -137,7 +142,7 @@ def write_review(request, user_id):
     }
     return render(request, "wall/write_review.html", context)
 
-def process_review(request):
+def process_review(request, user_id):
     errors = Loyalty.objects.validate(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
@@ -146,16 +151,16 @@ def process_review(request):
 
     all_loyalty =Loyalty.objects.all()
     if len(all_loyalty.filter(email=request.POST['email'])) > 0:
-        Review.objects.create(review=request.POST['review'], author=Loyalty.objects.get(email=request.POST['email']), user_reviewed=User.objects.get(id=request.session['user_id']))
-        return redirect('/wall/' + str(request.session['user_id']))
+        Review.objects.create(review=request.POST['review'], author=Loyalty.objects.get(email=request.POST['email']), user_reviewed=User.objects.get(id=user_id))
+        return redirect('/wall/' + str(user_id))
     else:
-        loyalty = Loyalty.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], phone=request.POST['phone'], owner=User.objects.get(id=request.session['user_id']))
-        Review.objects.create(review=request.POST['review'], author=loyalty, user_reviewed=User.objects.get(id=request.session['user_id']))
-    return redirect('/wall/' + str(request.session['user_id']))
+        loyalty = Loyalty.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], phone=request.POST['phone'], owner=User.objects.get(id=user_id))
+        Review.objects.create(review=request.POST['review'], author=loyalty, user_reviewed=User.objects.get(id=user_id))
+    return redirect('/wall/' + str(user_id))
 
 def destroy_review(request):
     review = Review.objects.get(id=request.POST['review_id'])
-    print('review_id object', review)
+    # print('review_id object', review)
     review.delete()
     return redirect('/dashboard')
 
@@ -198,6 +203,6 @@ def update_event_pic(request, event_id):
 
 def destroy_event(request, event_id):
     event = Event.objects.get(id=event_id)
-    print('event_id object', event)
+    # print('event_id object', event)
     event.delete()
     return redirect('/dashboard')

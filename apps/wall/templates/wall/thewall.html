@@ -88,7 +88,7 @@
 
             <div class='container text-center'>
 
-                <a href='https://www.linkedin.com/in/{{user.linkedin}}' class='btn btn-primary text-white block'>
+                <a href='https://www.linkedin.com/{{user.linkedin}}' class='btn btn-primary text-white block'>
                     <img class='logo' src="{% static 'wall/images/linkedin.png' %}" alt='linkedin logo'>
                     <p class='logo_btn row_inline_block logo_font'>Linkedin</p>
                 </a>
@@ -176,8 +176,15 @@
             <h5> Pinned Messages </h5>
             {% for pinned in user_messages %}
             <div>
+                {% if id == session_id.user_id  %}
+                    
+                    <a href='/unpin_message/{{pinned.id}}' class='row_inline_block btn btn-outline-danger btn-sm text-red'> remove </a>
+                    
+                    
+                {% else %}
                 <img class='row_inline_block' src="{% static 'wall/images/push-pin.png' %}" alt='push pin' height='20px'
                     width="20px">
+                {% endif %}
                 <p class='row_inline_block'> {{pinned.author.first_name}}: {{pinned.message}} </p>
 
                 {% for comment in user_messages.written_comment.all %}

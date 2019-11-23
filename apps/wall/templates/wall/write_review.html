@@ -24,7 +24,7 @@
                 <p class="text-danger">{{ message }}</li>
                 {% endfor %}
         {% endif %}
-        <form action="/process_review" method="POST"> 
+        <form action="/process_review/{{user.id}}" method="POST"> 
         {% csrf_token %}
             <div class="form-group row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">First name</label>
