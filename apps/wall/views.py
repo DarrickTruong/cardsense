@@ -1,14 +1,26 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic.base import RedirectView
+from django.views.generic.base import TemplateView
 from django.contrib import messages
-from .models import Lead, User, Loyalty, Message, Review, Event, Comment
+from .models import User, Loyalty, Review, Lead, Message, Comment, Event
 from time import strftime
+from django.conf import settings
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def index(request):
     return redirect('/login')
 
 # user/dashboard routes
-def dashboard(request):
+
+def dashboard(request,  **kwargs):
+    def get_context_data(self, **kwargs):  # new
+        context = super().get_context_data(**kwargs)
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
+        return context
+
     if 'user_id' not in request.session:
         return redirect('/login')
     user = User.objects.get(id=request.session['user_id'])
@@ -16,17 +28,25 @@ def dashboard(request):
     context = {
         'user' : user,
         'leads' : user.my_lead.all(),
-        'my_messages' : user.written_message.all(),
+        'my_messages' : user.messages.all(),
         'reviews' : user.my_review.all(),
         'loyalty' : user.loyal_client.all(),
         'events' :user.my_event.all(),
     }
     return render(request, 'wall/dashboard.html', context)
 
+def charge(request):  # new
+    if request.method == 'POST':
+        charge = stripe.Charge.create(
+            amount=500,
+            currency='usd',
+            description='A Django charge',
+            source=request.POST['stripeToken']
+        )
+        return render(request, 'charge.html')
+
 def thewall(request, user_id):
     user = User.objects.get(id=user_id)
-    # print("user messages", user.written_message.all())
-    # print("user pinned messages", user.written_message.filter(pinned=True))
     context = {
         'user' : user,
         'id' : user.id,
@@ -34,8 +54,10 @@ def thewall(request, user_id):
         'events' : user.my_event.all(),
         'session_id' : request.session,
         'profile_pic' : user.profile_pic.url,
-        'user_messages' : user.written_message.filter(pinned=True)
+        'user_messages' : user.messages.filter(pinned=True),
     }
+    message = user.messages.get(id=8)
+    # print('** baseball message ** ', message.comments.all())
     return render(request, 'wall/thewall.html', context)
 
 def edit_contact(request):
@@ -73,8 +95,6 @@ def update_profile_pic(request):
     user.profile_pic = request.FILES['profile_pic']
     user.save()
     return redirect('/dashboard')
-
-
 
 
 
@@ -117,6 +137,12 @@ def unpin_message(request, message_id):
     message = Message.objects.get(id=message_id)
     message.pinned = False
     message.save()
+    # print('message pinned True', message.pinned)
+    return redirect('/dashboard')
+
+def destroy_message(request, message_id):
+    message = Message.objects.get(id=message_id)
+    message.delete()
     # print('message pinned True', message.pinned)
     return redirect('/dashboard')
     
@@ -167,7 +193,6 @@ def destroy_review(request):
 
 
 
-
 # Event routes
 def process_event(request):
     errors = Event.objects.validate(request.POST)
@@ -206,3 +231,7 @@ def destroy_event(request, event_id):
     # print('event_id object', event)
     event.delete()
     return redirect('/dashboard')
+
+
+
+

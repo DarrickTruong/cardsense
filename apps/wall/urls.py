@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^comment/(?P<message_id>\d+)$', views.comment),
     url(r'^pin_message/(?P<message_id>\d+)$', views.pin_message),
     url(r'^unpin_message/(?P<message_id>\d+)$', views.unpin_message),
+    url(r'^destroy_message/(?P<message_id>\d+)$', views.destroy_message),
     url(r'^write_review/(?P<user_id>\d+)$', views.write_review),
     url(r'^process_review/(?P<user_id>\d+)$', views.process_review),
     url(r'^destroy_review$', views.destroy_review),
@@ -24,4 +25,5 @@ urlpatterns = [
     url(r'^process_edit_event/(?P<event_id>\d+)$', views.process_edit_event),
     url(r'^update_event_pic/(?P<event_id>\d+)$', views.update_event_pic),
     url(r'^destroy_event/(?P<event_id>\d+)$', views.destroy_event),
+    url(r'^charge', views.charge)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

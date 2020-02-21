@@ -50,19 +50,19 @@ def create(request):
     else:
         password = request.POST['password']
         pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-        print('pw_hash', pw_hash)
+        # print('pw_hash', pw_hash)
         User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], phone=request.POST['phone'], birthday=request.POST['birthday'], password=pw_hash)
         request.session['user_id'] = User.objects.last().id
     return redirect('/final_setup')
 
 def final_setup(request):
     user = User.objects.get(id=request.session['user_id'])
-    print('this is created user', user)
+    # print('this is created user', user)
     return render(request, "login_register/final_setup.html")
 
 def process_setup(request):
     user = User.objects.get(id=request.session['user_id'])
-    print('this is last user', user)
+    # print('this is last user', user)
     errors = User.objects.socialvalidate(request.POST)
     if len(errors) > 0:
         print('this is error in process_setup')

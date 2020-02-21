@@ -77,7 +77,7 @@ class Lead(models.Model):
 
 class Message(models.Model):
     message = models.TextField()
-    user_messaged = models.ForeignKey(User, related_name= 'written_message')
+    user_messaged = models.ForeignKey(User, related_name= 'messages')
     pinned = models.BooleanField(default=False)
     author = models.ForeignKey(Lead, related_name='message_written')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -86,7 +86,7 @@ class Message(models.Model):
 
 class Comment(models.Model):
     comment = models.TextField()
-    message = models.ForeignKey(Message, related_name= 'written_comment', null=True)
+    message = models.ForeignKey(Message, related_name= 'comments', null=True)
     author = models.ForeignKey(User, related_name='my_comment', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __repr__(self):
