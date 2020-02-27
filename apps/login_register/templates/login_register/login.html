@@ -64,13 +64,15 @@
             </ul>
         </div>
     </nav>
-    <!-- Login NavBar -->
 
-    <div class='parallax-window' data-parallax="scroll" data-image-src="{% static 'wall/css/computer.jpg' %}" >
-        <div class="row justify-content-center">
-            <h1 class="text-center mt-10 p-5 text-white">
-                Business Name
-            </h1>
+
+
+    <div class='parallax-window' data-parallax="scroll" data-image-src="{% static 'wall/css/computer.jpg' %}">
+        <div class="heroinfo">
+            <div>
+                <h1>Enhance Your Reach</h1>
+                <h1>with a Digital Business Card</h1>
+            </div>
         </div>
     </div>
 
@@ -80,25 +82,34 @@
         <div class='row align-items-center'>
             <div class='col-5'>
                 <div class='text-center border rounded border-secondary p-5'>
-                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
-                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
-                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
-                    <h4 class=' '><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
+                    <h4 id='nfc'><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
+                    <h4 id='cardsense'><button class='btn btn-outline-secondary mt-1'> What is CardSense? </button></h4>
                 </div>
             </div>
             <div class='col-7 businessimg text-center'>
+                <div id="popup" class="noDisplay">
+                    <button class="exitUpgrade"> x </button>
+                </div>
             </div>
 
         </div>
 
-
-
-
-
     </div>
 
 
-
+    <script>
+        $(document).ready(function () {
+            $("#nfc").click(function(){
+                $('#popup').removeClass('noDisplay')
+            });
+            $(".exitUpgrade").click(function () {
+                $('#popup').addClass('noDisplay')
+            });
+            $("#cardsense").click(function(){
+                $('#popup').removeClass('noDisplay')
+            })
+        })
+    </script>
 
 
 
@@ -143,12 +154,14 @@
                             <div class="form-group row">
                                 <div class="col-sm-8">
                                     <!-- <input type="tel" class="form-control-sm" name='phone' placeholder="(012)345-6789"> -->
-                                    <input type="text" class="form-control-sm bfh-phone" placeholder="Phone Number" name='phone'>
+                                    <input type="text" class="form-control-sm bfh-phone" placeholder="Phone Number"
+                                        name='phone'>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-8">
-                                    <input type="date" class="form-control-sm" name='birthday' placeholder='Date of birth'>
+                                    <input type="date" class="form-control-sm" name='birthday'
+                                        placeholder='Date of birth'>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -173,11 +186,6 @@
         </div>
 
     </div>
-
-
-
-
-
 
 
 

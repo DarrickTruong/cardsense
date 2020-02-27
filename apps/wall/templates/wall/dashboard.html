@@ -69,9 +69,9 @@
 
     </nav>
 
-
+<!-- upgrade options popup -->
     <div id="upgradeOptions" class="noDisplay">
-        <button id="exitUpgrade">X</button>
+        <button class="exitUpgrade">X</button>
         <h4> Premium Membership </h5>
         <div>
             <h6> Unlock your full potential with a premium membership! $5 per month!</h6>
@@ -386,7 +386,7 @@
                 $('#upgradeOptions').removeClass('noDisplay');
             })
 
-            $("#exitUpgrade").click(function() {
+            $(".exitUpgrade").click(function() {
                 console.log('exit upgrade');
                 $('#upgradeOptions').addClass('noDisplay');
             })

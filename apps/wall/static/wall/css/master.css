@@ -5,7 +5,7 @@
 #upgradeOptions {
     border: 1px solid silver;
     width: 400px;
-    height: 220px;
+    
     position: absolute;
     left: 33%;
     top: 80px;
@@ -17,9 +17,8 @@
 #upgradeOptions h5{
     text-align: center;
 }
-#upgradeOptions button {
+.exitUpgrade{
     float: right;
-
 }
 #upgradeOptions div {
     outline: 1px solid silver;
@@ -194,13 +193,7 @@ a.block {
     
 }
 
-.heroinfo {
-    margin: auto 0px auto 0px;
-    vertical-align: middle;
-    border-radius: 10px; 
-    border: 1px grey 1px;
 
-}
 
 .opacity {
     opacity: .5;
@@ -239,7 +232,10 @@ a.block {
 .parallax-window {
     height: 100vh;
     background: transparent;
+    position: relative;
 }
+
+
 
 .parallax__layer {
     background-image: url("phone.jpg");
@@ -262,4 +258,36 @@ nav.icon {
 
 .icon {
     width: 30px;
+}
+
+.heroinfo {
+    margin: auto 0px;
+    height: 400px;
+    width: 1000px;
+    background-color: rgba(48, 48, 49, 0.747);
+    border-radius: 5px; 
+    border: 1px grey 1px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroinfo h1 {
+    margin: auto 0px;
+    color: whitesmoke;
+    vertical-align: middle;
+}
+
+#popup {
+    height: 400px;
+    width: 435px;
+    background-color: whitesmoke;
+    position: relative;
+    top: 25%;
+    left: 15%;
+    box-shadow: 8px 5px 2px 1px rgba(48, 48, 49, 0.315);
 }
