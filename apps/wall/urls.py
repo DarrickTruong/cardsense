@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^destroy_message/(?P<message_id>\d+)$', views.destroy_message),
     url(r'^write_review/(?P<user_id>\d+)$', views.write_review),
     url(r'^process_review/(?P<user_id>\d+)$', views.process_review),
-    url(r'^destroy_review$', views.destroy_review),
+    url(r'^destroy_review/(?P<review_id>\d+)$', views.destroy_review),
     url(r'^process_event$', views.process_event),
     url(r'^update_profile_pic$', views.update_profile_pic),
     url(r'^edit_event/(?P<event_id>\d+)$', views.edit_event),

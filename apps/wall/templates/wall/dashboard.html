@@ -8,16 +8,15 @@
     <title> {{user.first_name}}'s Dashboard</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
+    <link rel="icon" href="{% static 'wall/images/css.svg' %}" type="image/gif" sizes="16x16">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>   
@@ -25,7 +24,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-    
+
 
 </head>
 
@@ -34,9 +33,8 @@
     <nav class=" navbar navbar-expand-lg navbar-light bg-primary fixed-top">
         <a class=" navbar-brand" href="/">CardSense</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -44,13 +42,11 @@
             <ul class=" navbar-nav">
 
                 <li class="nav-item active">
-                    <a href='/wall/{{user.id}}'
-                        class='m-1 nav-link btn btn-sm btn-light text-secondary'> Your Wall</a>
+                    <a href='/wall/{{user.id}}' class='m-1 nav-link btn btn-sm btn-light text-secondary'> Your Wall</a>
                 </li>
 
                 <li class="nav-item active">
-                    <a href='/edit_contact'
-                        class='m-1 nav-link btn btn-sm btn-secondary text-white'> Edit Contact
+                    <a href='/edit_contact' class='m-1 nav-link btn btn-sm btn-secondary text-white'> Edit Contact
                         Info</a>
                 </li>
                 <li class="nav-item active">
@@ -69,19 +65,19 @@
 
     </nav>
 
-<!-- upgrade options popup -->
+    <!-- upgrade options popup -->
     <div id="upgradeOptions" class="noDisplay">
         <button class="exitUpgrade">X</button>
         <h4> Premium Membership </h5>
-        <div>
-            <h6> Unlock your full potential with a premium membership! $5 per month!</h6>
-        </div>
-        <form action="/charge" method="post">
-            {% csrf_token %}
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_e1yulkOnJTJAXafEyWFpqZCT00Tlhdtogv" data-description="A Django Charge"
-                data-amount="500" data-locale="auto"></script>
-        </form>
+            <div>
+                <h6> Unlock your full potential with a premium membership! $5 per month!</h6>
+            </div>
+            <form action="/charge" method="post">
+                {% csrf_token %}
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_e1yulkOnJTJAXafEyWFpqZCT00Tlhdtogv" data-description="A Django Charge"
+                    data-amount="500" data-locale="auto"></script>
+            </form>
     </div>
 
     <div class='container mt-5'>
@@ -115,16 +111,15 @@
                             <div class="form-group">
                                 <textarea class="form-control" rows="2" name='comment'></textarea>
                             </div>
-                            <input type='submit' class='btn-sm btn btn-primary' name='submit'
-                                value='Submit'>
+                            <input type='submit' class='btn-sm btn btn-primary' name='submit' value='Submit'>
                         </form>
                     </td>
                     <td>
                         <a href='/pin_message/{{message.id}}'>
-                            <img class="icon" src="{% static 'wall/images/push-pin.png' %}">
+                            <img class="icon" src="{% static 'wall/images/push-pin.png' %}" alt="pin message">
                         </a>
                         <a href='/destroy_message/{{message.id}}'>
-                            <img class='icon' src="{% static 'wall/images/cancel.png' %}">
+                            <img class='icon' src="{% static 'wall/images/cancel.png' %}" alt="delete message">
                         </a>
                     </td>
 
@@ -164,8 +159,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label"> When: </label>
                                 <div class="col-sm-9">
-                                    <input type='date' id='datepicker' class="form-control"
-                                        name='when'>
+                                    <input type='date' id='datepicker' class="form-control" name='when'>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -178,16 +172,12 @@
                                 <label class="col-sm-3 col-form-label"> Event Pic: </label>
                                 <div class="col-sm-9 input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"
-                                            id="inputGroupFileAddon01">Upload</span>
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input"
-                                            id="inputGroupFile01"
-                                            aria-describedby="inputGroupFileAddon01"
-                                            name='event_pic'>
-                                        <label class="custom-file-label"
-                                            for="inputGroupFile01">Choose file</label>
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                            aria-describedby="inputGroupFileAddon01" name='event_pic'>
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -207,30 +197,36 @@
                         <table class='table table-sm table-striped table-active'>
                             <tr>
                                 <th> What: </th>
-                                <td><p> {{event.what}} </p></td>
+                                <td>
+                                    <p> {{event.what}} </p>
+                                </td>
                             </tr>
                             <tr>
                                 <th> When: </th>
-                                <td><p> {{event.when}} </p></td>
+                                <td>
+                                    <p> {{event.when}} </p>
+                                </td>
                             </tr>
                             <tr>
                                 <th> Where: </th>
-                                <td><p> {{event.where}} </p></td>
+                                <td>
+                                    <p> {{event.where}} </p>
+                                </td>
                             </tr>
                             <tr>
                                 <th> Why: </th>
-                                <td><p> {{event.why}} </p></td>
+                                <td>
+                                    <p> {{event.why}} </p>
+                                </td>
                             </tr>
                             <tr>
                                 <th> Event Pic: </th>
-                                <td> <img src="{{event.event_pic.url}}" alt='event picture'
-                                        width='200px'> </td>
+                                <td> <img src="{{event.event_pic.url}}" alt='event picture' width='200px'> </td>
                             </tr>
                         </table>
-                        <a href='/edit_event/{{event.id}}'
-                            class='btn btn-outline-primary btn-sm'>Edit</a>
-                        <a href='/destroy_event/{{event.id}}'
-                            class='btn btn-outline-danger btn-sm'>Delete</a>
+                        <a href='/edit_event/{{event.id}}' class='btn btn-outline-primary btn-sm'>Edit</a>
+                        <a href='/destroy_event/{{event.id}}'><img class='icon'
+                                src="{% static 'wall/images/cancel.png' %}" alt="delete message"></a>
                         <div class='line_divider'></div>
                         {% endfor %}
                     </div>
@@ -280,8 +276,7 @@
                             <form action='/convert_lead' method="POST">
                                 {% csrf_token %}
                                 <input type='hidden' name='lead_id' value={{lead.id}}>
-                                <input type='submit' class='btn btn-outline-success btn-sm'
-                                    value='Convert'>
+                                <input type='submit' class='btn btn-outline-success btn-sm' value='Convert'>
                             </form>
                         </td>
                     </tr>
@@ -349,12 +344,9 @@
                         <p> {{review.review}} </p>
                     </td>
                     <td>
-                        <form action='destroy_review' method="POST">
-                            {% csrf_token %}
-                            <input type='hidden' name='review_id' value={{review.id}}>
-                            <input type='submit' class='btn btn-outline-danger btn-sm'
-                                value='Delete'>
-                        </form>
+                        <a href='/destroy_review/{{review.id}}'>
+                            <img class='icon' src="{% static 'wall/images/cancel.png' %}" alt="delete review">
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -380,18 +372,18 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
     <script>
-        $(document).ready(function(){
-            $('#upgrade').click(function() {
+        $(document).ready(function () {
+            $('#upgrade').click(function () {
                 console.log('upgrade options');
                 $('#upgradeOptions').removeClass('noDisplay');
             })
 
-            $(".exitUpgrade").click(function() {
+            $(".exitUpgrade").click(function () {
                 console.log('exit upgrade');
                 $('#upgradeOptions').addClass('noDisplay');
             })
         })
-        
+
     </script>
 
 

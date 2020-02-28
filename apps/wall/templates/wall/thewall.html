@@ -9,6 +9,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
     <link rel="stylesheet" href="{% static 'wall/css/bootstrap.css' %}">
+    <link rel="icon" href="{% static 'wall/images/css.svg' %}" type="image/gif" sizes="16x16">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -183,24 +184,24 @@
 
             {% for pinned in user_messages %}
             <div class='border rounded mt-2 p-3'>
-                
-                    {% if id == session_id.user_id  %}
-                    <a href='/unpin_message/{{pinned.id}}' class='row_inline_block btn btn-outline-danger btn-sm text-red'>
-                        remove </a>
-                    {% else %}
-                    <img class='row_inline_block' src="{% static 'wall/images/push-pin.png' %}" alt='push pin' height='20px'
-                        width="20px">
-                    {% endif %}
 
-                    <p class='row_inline_block rounded border p-1 bg-light'> {{pinned.author.first_name}}:
-                        {{pinned.message}} </p>
+                {% if id == session_id.user_id  %}
+                <a href='/unpin_message/{{pinned.id}}' class='row_inline_block btn btn-outline-danger btn-sm text-red'>
+                    remove </a>
+                {% else %}
+                <img class='row_inline_block' src="{% static 'wall/images/push-pin.png' %}" alt='push pin' height='20px'
+                    width="20px">
+                {% endif %}
 
-                    {% for comment in pinned.comments.all %}
+                <p class='row_inline_block rounded border p-1 bg-light'> {{pinned.author.first_name}}:
+                    {{pinned.message}} </p>
 
-                    <div class='comments border rounded p-2 bg-light'>
-                        <p> {{comment.author.first_name}}: {{comment.comment}} </p>
-                    </div>
-                
+                {% for comment in pinned.comments.all %}
+
+                <div class='comments border rounded p-2 bg-light'>
+                    <p> {{comment.author.first_name}}: {{comment.comment}} </p>
+                </div>
+
                 {% endfor %}
 
             </div>

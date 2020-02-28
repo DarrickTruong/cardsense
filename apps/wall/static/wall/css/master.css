@@ -1,6 +1,6 @@
-/* *{
-    border:1px solid grey;
-} */
+.gradient {
+    background: linear-gradient(90deg, rgba(21,127,251) 0%, rgba(151,20,255,1) 100%);
+}
 
 #upgradeOptions {
     border: 1px solid silver;
@@ -186,9 +186,9 @@ a.block {
 }
 
 .businessimg {
-    
+    border-radius: 10px;
     background:url("CardSense.jpeg") no-repeat center; 
-    height:100vh;
+    height:90vh;
     /* background-size: 100%; */
     
 }

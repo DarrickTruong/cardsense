@@ -8,6 +8,7 @@
     <title>Edit Event</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
+    <link rel="icon" href="{% static 'wall/images/css.svg' %}" type="image/gif" sizes="16x16">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -37,7 +38,7 @@
                 <p class="text-danger"> {{ message }} </li>
                 {% endfor %}
             {% endif %}
-            <form action="/process_edit_event/{{event.id}}"  method='POST'>
+            <form action="/process_edit_event/{{event.id}}" method='POST'>
                 <div class="form-group row">
                     {% csrf_token %}
                     <label for="staticEmail" class="col-sm-2 col-form-label">What:</label>
@@ -68,7 +69,7 @@
             </form>
     </div>
 
-   
+
 
 
 

@@ -42,8 +42,8 @@ class EventsManager(models.Manager):
             errors['where'] = "Please provide a location"
         if len(postData['when']) < 2:
             errors['when'] = "Please provide an event date"
-        if len(postData['why']) < 10:
-            errors['why'] = "Please write a few sentences for the WHY"
+        if len(postData['why']) < 2:
+            errors['why'] = "Please provide a description for your event"
         
         return errors
 

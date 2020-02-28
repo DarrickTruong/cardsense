@@ -19,7 +19,7 @@ def login_valid(request):
             # ** redirect after POST**
         else:
             messages.error(request, "Email and Password do not match or do not exist.")
-            print('in else error **')
+            # print('in else error **')
             return render(request, 'login_register/login.html', context = {'message' : "Email and Password do not match or do not exist."})
     else:
             messages.error(request, "Email and Password do not match or do not exist.")
@@ -62,22 +62,32 @@ def final_setup(request):
 
 def process_setup(request):
     user = User.objects.get(id=request.session['user_id'])
-    # print('this is last user', user)
-    errors = User.objects.socialvalidate(request.POST)
-    if len(errors) > 0:
-        print('this is error in process_setup')
-        for key, value in errors.items():
-            messages.error(request, value, extra_tags=key)
-        return redirect('/final_setup')
-    else:
-        print('this is last user', user)
-        user = User.objects.last()
-        user.linkedin = request.POST['linkedin']
-        user.facebook = request.POST['facebook']
-        user.instagram = request.POST['instagram']
-        user.website = request.POST['website']
+    # # print('this is last user', user)
+    # errors = User.objects.socialvalidate(request.POST)
+    # if len(errors) > 0:
+    #     print('this is error in process_setup')
+    #     for key, value in errors.items():
+    #         messages.error(request, value, extra_tags=key)
+    #     return redirect('/final_setup')
+    # else:
+    #     print('this is last user', user)
+    #     user = User.objects.last()
+    #     user.linkedin = request.POST['linkedin']
+    #     user.facebook = request.POST['facebook']
+    #     user.instagram = request.POST['instagram']
+    #     user.website = request.POST['website']
+    #     user.profile_pic = request.FILES['profile_pic']
+    #     user.save()
+    # return redirect('/dashboard')
+    print('this is last user', user)
+    user = User.objects.last()
+    user.linkedin = request.POST['linkedin']
+    user.facebook = request.POST['facebook']
+    user.instagram = request.POST['instagram']
+    user.website = request.POST['website']
+    if 'profile_pic' in request.FILES:
         user.profile_pic = request.FILES['profile_pic']
-        user.save()
+    user.save()
     return redirect('/dashboard')
 
 

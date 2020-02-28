@@ -9,6 +9,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
     <link rel="stylesheet" href="{% static 'wall/css/bootstrap.css' %}">
+    <link rel="icon" href="{% static 'wall/images/css.svg' %}" type="image/gif" sizes="16x16">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -77,36 +78,38 @@
     </div>
 
 
-
-    <div class='container p-6 m-3 py-3'>
-        <div class='row align-items-center'>
-            <div class='col-5'>
-                <div class='text-center border rounded border-secondary p-5'>
-                    <h4 id='cardsense'><button class='btn btn-outline-secondary mt-1'> What is CardSense? </button></h4>
-                    <h4 id='nfc'><button class='btn btn-outline-secondary mt-1'> What is NFC? </button></h4>
+    <div class="gradient">
+        <div class='container p-6 py-3'>
+            <div class='row align-items-center'>
+                <div class='col-sm-5'>
+                    <div class='text-center border rounded border-light p-5'>
+                        <h4 id='cardsense'><button class='btn border-light mt-1 text-light'> What is CardSense?
+                            </button></h4>
+                        <h4 id='nfc'><button class='btn border-light mt-1 text-light'> What is NFC? </button></h4>
+                    </div>
                 </div>
-            </div>
-            <div class='col-7 businessimg text-center'>
-                <div id="popup" class="noDisplay">
-                    <button class="exitUpgrade"> x </button>
+                <div class='col-sm-7 businessimg text-center '>
+                    <div id="popup" class="noDisplay">
+                        <button class="exitUpgrade"> x </button>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-
     </div>
 
 
     <script>
         $(document).ready(function () {
-            $("#nfc").click(function(){
-                $('#popup').removeClass('noDisplay')
+            $("#nfc").click(function () {
+                // $('#popup').removeClass('noDisplay')
+                $('#popup').fadeIn("slow")
             });
             $(".exitUpgrade").click(function () {
-                $('#popup').addClass('noDisplay')
+                $('#popup').fadeOut("slow")
             });
-            $("#cardsense").click(function(){
-                $('#popup').removeClass('noDisplay')
+            $("#cardsense").click(function () {
+                $('#popup').fadeIn("slow")
             })
         })
     </script>
@@ -124,7 +127,7 @@
     </div>
     <div class='parallax2'>
         <div class='container mt-5 justify-content'>
-            <div id='login_mobile' class='col-lg-6 col-sm-4 p-3 border border-secondary rounded offset-7'>
+            <div id='login_mobile' class='col-lg-6 col-sm-4 p-3 border border-light rounded offset-7'>
                 <h3 class='text-white'>Sign Up Now</h3>
                 {% if messages %}
                     {% for message in messages %}

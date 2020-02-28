@@ -20,8 +20,8 @@ class UserManager(models.Manager):
             errors['phone'] = 'Phone is not in the right format'
         if len(postData['birthday']) < 2:
             errors['birthday'] = "Birthday must be longer than 2 characters"
-        if len(postData['password']) < 8:
-            errors['password'] = "Password should be at least 8 characters"
+        if len(postData['password']) < 4:
+            errors['password'] = "Password should be at least 4 characters"
         if postData['password'] != postData['password_confirm']:
             errors['password_confirm'] = 'Password does not match. Try Again'
             # Checking unique email
@@ -91,7 +91,7 @@ class User(models.Model):
     facebook = models.CharField(max_length=255, null=True, blank=True)
     instagram = models.CharField(max_length=255, null=True, blank=True)
     google = models.CharField(max_length=255, null=True, blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pics', null=True)
+    profile_pic = models.ImageField(upload_to='profile_pics', null=True, blank=True)
     def __repr__(self):
             return f"<Wizard object: {self.first_name} ({self.id})>"
 

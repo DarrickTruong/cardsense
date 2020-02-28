@@ -47,6 +47,7 @@ def charge(request):  # new
 
 def thewall(request, user_id):
     user = User.objects.get(id=user_id)
+    print(user.profile_pic.url)
     context = {
         'user' : user,
         'id' : user.id,
@@ -56,8 +57,6 @@ def thewall(request, user_id):
         'profile_pic' : user.profile_pic.url,
         'user_messages' : user.messages.filter(pinned=True),
     }
-    message = user.messages.get(id=8)
-    # print('** baseball message ** ', message.comments.all())
     return render(request, 'wall/thewall.html', context)
 
 def edit_contact(request):
@@ -184,8 +183,8 @@ def process_review(request, user_id):
         Review.objects.create(review=request.POST['review'], author=loyalty, user_reviewed=User.objects.get(id=user_id))
     return redirect('/wall/' + str(user_id))
 
-def destroy_review(request):
-    review = Review.objects.get(id=request.POST['review_id'])
+def destroy_review(request, review_id):
+    review = Review.objects.get(id=review_id)
     # print('review_id object', review)
     review.delete()
     return redirect('/dashboard')
