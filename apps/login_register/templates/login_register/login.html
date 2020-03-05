@@ -32,23 +32,29 @@
     <!-- Login Navbar -->
     <nav class=" navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
         <h4 class='text-white'>CardSense</h4>
-        <div class="container">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <p class='text-light'>{{ message }}</p>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="dropdown order-1">
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown"
-                        class="btn btn-outline-secondary dropdown-toggle text-white">Login <span
+                        class="btn btn-outline-secondary dropdown-toggle text-white navbar-collapse collapse">Login <span
                             class="caret"></span></button>
-                    <ul class="dropdown-menu dropdown-menu-right mt-2">
+                    <ul class="dropdown-menu dropdown-menu-right mt-2" id="navbarNavDropdown">
                         <li class="px-3 py-2">
                             <form class="form" action='/login_valid' method="POST">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <input id="emailInput" placeholder="Email" class="form-control form-control-sm"
+                                    <input placeholder="Email" class="form-control form-control-sm"
                                         type="text" name='email'>
                                 </div>
                                 <div class="form-group">
-                                    <input id="passwordInput3" placeholder="Password"
+                                    <input placeholder="Password"
                                         class="form-control form-control-sm" type="password" name='password'>
                                 </div>
                                 <div class="form-group">
@@ -70,27 +76,28 @@
 
     <div class='parallax-window' data-parallax="scroll" data-image-src="{% static 'wall/css/computer.jpg' %}">
         <div class="heroinfo">
-            <div>
+            <div class='col-lg-6 col-sm-4'>
                 <h1>Enhance Your Reach</h1>
                 <h1>with a Digital Business Card</h1>
             </div>
         </div>
     </div>
 
-
+<!-- Info Popup -->
     <div class="gradient">
         <div class='container p-6 py-3'>
-            <div class='row align-items-center'>
-                <div class='col-sm-5'>
-                    <div class='text-center border rounded border-light p-5'>
+            <div class='row align-items-center justify-content-between'>
+                
+                    <div class='text-center border rounded border-light p-5 col-sm-5'>
                         <h4 id='cardsense'><button class='btn border-light mt-1 text-light'> What is CardSense?
                             </button></h4>
                         <h4 id='nfc'><button class='btn border-light mt-1 text-light'> What is NFC? </button></h4>
                     </div>
-                </div>
+                
                 <div class='col-sm-7 businessimg text-center '>
                     <div id="popup" class="noDisplay">
                         <button class="exitUpgrade"> x </button>
+                        <div class="popupInfo"></div>
                     </div>
                 </div>
 
@@ -101,16 +108,38 @@
 
     <script>
         $(document).ready(function () {
+            let popupInfo = "";
+
+            $("#cardsense").click(function () {
+                popupInfo = "";
+                popupInfo +=
+                "<h3> CardSense </h3>" +
+                "<p> CardSense is your Digital Business Card, a one-stop shop for everything YOU. Display everything from your contact information," +
+                " social media links, LinkedIn, events that you are hosting, and allow users to post professional reviews and questions! </p>" +
+                "<h6> Try it for free! Sign up below! </h6>";
+
+                $('.popupInfo').html(popupInfo);
+                $('#popup').fadeIn("slow")
+            });
+
             $("#nfc").click(function () {
                 // $('#popup').removeClass('noDisplay')
+                popupInfo = "";
+                popupInfo += 
+                "<h3> NFC </h3>" +
+                "Near Field Communication (NFC) is a contact-less communication technology based on a radio frequency field. " +
+                "CardSense utilizes NFC technology to exchange data between two devices." +
+                "Just touch your NFC enabled business card to a NFC capable phone and your digital business card will instantly appear!"
+
+                $('.popupInfo').html(popupInfo);
                 $('#popup').fadeIn("slow")
             });
+            // exit popup
             $(".exitUpgrade").click(function () {
-                $('#popup').fadeOut("slow")
+                $('#popup').fadeOut("slow");
+                popupInfo = ""
             });
-            $("#cardsense").click(function () {
-                $('#popup').fadeIn("slow")
-            })
+            
         })
     </script>
 
