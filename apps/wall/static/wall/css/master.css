@@ -15,11 +15,14 @@
         text-align: left;
         font-size: smaller;
         }
-    div.businessinfo {
-        height: 50vh;
+    div.businessimg {
+        height: 60vh;
     }
     div.parallax2 {
         background-size: cover;
+    }
+    table.messages {
+        font-size: smaller;
     }
 }
 
