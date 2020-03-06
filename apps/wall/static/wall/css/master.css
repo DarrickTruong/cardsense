@@ -13,7 +13,7 @@
         box-shadow: 8px 5px 2px 1px rgba(48, 48, 49, 0.315);
         padding: 50px;
         text-align: left;
-        font-size: smaller;
+        font-size: larger;
         }
     div.businessimg {
         height: 60vh;
@@ -23,6 +23,13 @@
     }
     table.messages {
         font-size: smaller;
+    }
+    div#upgradeOptions {
+        position: absolute;
+        top: 35%;
+        left: 10%;
+        width: 80vw;
+        z-index: 1;
     }
 }
 
@@ -40,6 +47,7 @@
     box-shadow: 8px 8px 2px 1px rgba(67, 67, 70, 0.2);
     padding: 20px;
     border-radius: 10px 10px;
+    z-index: 1;
 }
 #upgradeOptions h5{
     text-align: center;

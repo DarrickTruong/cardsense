@@ -9,7 +9,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
     <link rel="stylesheet" href="{% static 'wall/css/bootstrap.css' %}">
-    <link rel="icon" href="{% static 'wall/images/css.svg' %}" type="image/gif" sizes="16x16">
+    <link rel="icon" href="{% static 'wall/images/css.png' %}" type="image/png" sizes="16x16">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -127,9 +127,9 @@
                 popupInfo = "";
                 popupInfo += 
                 "<h3> NFC </h3>" +
-                "Near Field Communication (NFC) is a contact-less communication technology based on a radio frequency field. " +
+                "<p>Near Field Communication (NFC) is a contact-less communication technology based on a radio frequency field. " +
                 "CardSense utilizes NFC technology to exchange data between two devices." +
-                "Just touch your NFC enabled business card to a NFC capable phone and your digital business card will instantly appear!"
+                "Just touch your NFC enabled business card to a NFC capable phone and your digital business card will instantly appear!</p>"
 
                 $('.popupInfo').html(popupInfo);
                 $('#popup').fadeIn("slow")
