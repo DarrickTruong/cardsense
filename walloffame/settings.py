@@ -25,9 +25,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = '6rmytx2dc#oz2#bhlo%_-76(ptq2igildrux5wc6f-2ou^-b13'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3.16.22.195']
 
 
 # Application definition
@@ -123,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STRIPE_SECRET_KEY = 'sk_test_cVqkljoF4PuZNkNvvnjESu4N00v3MQFaLp'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_e1yulkOnJTJAXafEyWFpqZCT00Tlhdtogv'
