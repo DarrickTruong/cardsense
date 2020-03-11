@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 import re
-from apps.login_register.models import User
+from .models import User
 from django.core.files.storage import FileSystemStorage
 
 # Create your models here
