@@ -55,15 +55,15 @@ class Loyalty(models.Model):
     last_name = models.CharField(max_length=45)
     email = models.CharField(max_length=255)
     phone = models.CharField(max_length=12, blank=True)
-    owner = models.ForeignKey(User, related_name='loyal_client')
+    owner = models.ForeignKey(User, related_name='loyal_client', on_delete=models.CASCADE)
     objects = LoyaltyManager()
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Review(models.Model):
     review = models.TextField()
-    author = models.ForeignKey(Loyalty, related_name='written_review')
-    user_reviewed = models.ForeignKey(User, related_name= 'my_review')
+    author = models.ForeignKey(Loyalty, related_name='written_review', on_delete=models.CASCADE)
+    user_reviewed = models.ForeignKey(User, related_name= 'my_review', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Lead(models.Model):
@@ -71,23 +71,23 @@ class Lead(models.Model):
     last_name = models.CharField(max_length=45)
     email = models.CharField(max_length=255)
     phone = models.CharField(max_length=12, blank=True)
-    owner = models.ForeignKey(User, related_name='my_lead')
+    owner = models.ForeignKey(User, related_name='my_lead', on_delete=models.CASCADE)
     objects = LeadManager()
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Message(models.Model):
     message = models.TextField()
-    user_messaged = models.ForeignKey(User, related_name= 'messages')
+    user_messaged = models.ForeignKey(User, related_name= 'messages', on_delete=models.CASCADE)
     pinned = models.BooleanField(default=False)
-    author = models.ForeignKey(Lead, related_name='message_written')
+    author = models.ForeignKey(Lead, related_name='message_written', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     def __repr__(self):
             return f"<Wizard object: {self.message} {self.user_messaged} {self.pinned} {self.author} {self.written_comment} ({self.id})>"
 
 class Comment(models.Model):
     comment = models.TextField()
-    message = models.ForeignKey(Message, related_name= 'comments', null=True)
-    author = models.ForeignKey(User, related_name='my_comment', null=True)
+    message = models.ForeignKey(Message, related_name= 'comments', null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name='my_comment', null=True, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     def __repr__(self):
             return f"<Wizard object: {self.comment} {self.message} {self.author} ({self.id})>"
