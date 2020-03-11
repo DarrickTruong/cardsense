@@ -106,7 +106,7 @@ class Event(models.Model):
     where = models.CharField(max_length=45)
     when = models.DateTimeField()
     why = models.TextField()
-    owner = models.ForeignKey(User, related_name='my_event', null=True)
+    owner = models.ForeignKey(User, related_name='my_event', null=True, on_delete=models.CASCADE)
     objects = EventsManager()
     event_pic = models.ImageField(upload_to='event_pic', null=True) 
     created_at = models.DateTimeField(auto_now_add=True)
