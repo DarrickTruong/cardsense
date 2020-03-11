@@ -10,9 +10,11 @@ def login(request):
     return render(request, 'login_register/login.html')
 
 def login_valid(request):
+    print("in login valid")
     user = User.objects.filter(email=request.POST['email'])
     if user:
         logged_user = user[0]
+        print(logged_user)
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
             request.session['user_id'] = logged_user.id
             return redirect('/dashboard')
