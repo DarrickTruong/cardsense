@@ -89,7 +89,7 @@ class Comment(models.Model):
     def __repr__(self):
             return f"<Wizard object: {self.comment} {self.message} {self.author} ({self.id})>"
 
-event_pic = FileSystemStorage(location='/static/media')
+event_pic = FileSystemStorage(location='/media')
 
 class Event(models.Model):
     what = models.CharField(max_length=45)
