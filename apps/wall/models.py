@@ -47,8 +47,6 @@ class EventsManager(models.Manager):
         
         return errors
 
-
-
 # Need to Migrate
 class Loyalty(models.Model):
     first_name = models.CharField(max_length=45)
@@ -58,7 +56,6 @@ class Loyalty(models.Model):
     owner = models.ForeignKey(User, related_name='loyal_client', on_delete=models.CASCADE)
     objects = LoyaltyManager()
     created_at = models.DateTimeField(auto_now_add=True)
-
 
 class Review(models.Model):
     review = models.TextField()
@@ -91,13 +88,6 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __repr__(self):
             return f"<Wizard object: {self.comment} {self.message} {self.author} ({self.id})>"
-
-
-
-
-
-
-
 
 event_pic = FileSystemStorage(location='/media')
 

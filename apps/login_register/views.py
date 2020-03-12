@@ -14,10 +14,10 @@ def login_valid(request):
     user = User.objects.filter(email=request.POST['email'])
     if user:
         logged_user = user[0]
-        print(logged_user)
+        print(logged_user.id)
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
             request.session['user_id'] = logged_user.id
-            print(logged_user)
+            print(logged_user.first_name)
             return redirect('/dashboard')
             # ** redirect after POST**
         else:
@@ -34,15 +34,6 @@ def logout(request):
         request.session.modified=True
         # print('user_id deleted')
     return redirect('/')
-
-# Login/Logout
-
-
-
-
-
-
-
 
 def create(request):
     errors = User.objects.validate(request.POST)
@@ -82,8 +73,8 @@ def process_setup(request):
     #     user.profile_pic = request.FILES['profile_pic']
     #     user.save()
     # return redirect('/dashboard')
-    print('this is last user', user)
-    user = User.objects.last()
+    # print('this is last user', user)
+    # user = User.objects.last()
     user.linkedin = request.POST['linkedin']
     user.facebook = request.POST['facebook']
     user.instagram = request.POST['instagram']
