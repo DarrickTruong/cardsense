@@ -17,12 +17,13 @@ def login_valid(request):
         print(logged_user)
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
             request.session['user_id'] = logged_user.id
+            print(logged_user)
             return redirect('/dashboard')
             # ** redirect after POST**
         else:
             messages.error(request, "Email and Password do not match or do not exist.")
             # print('in else error **')
-            return render(request, 'login_register/login.html', context = {'message' : "Email and Password do not match or do not exist."})
+            return render(request, 'login_register/login.html')
     else:
             messages.error(request, "Email and Password do not match or do not exist.")
             return redirect('/login')
@@ -47,7 +48,7 @@ def create(request):
     errors = User.objects.validate(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
-            messages.error(request,value, extra_tags=key)
+            messages.error(request,value, extra_tags="create")
         return redirect('/login')
     else:
         password = request.POST['password']
@@ -87,8 +88,7 @@ def process_setup(request):
     user.facebook = request.POST['facebook']
     user.instagram = request.POST['instagram']
     user.website = request.POST['website']
-    if 'profile_pic' in request.FILES:
-        user.profile_pic = request.FILES['profile_pic']
+    user.profile_pic = request.FILES['profile_pic']
     user.save()
     return redirect('/dashboard')
 

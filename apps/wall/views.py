@@ -16,11 +16,6 @@ def index(request):
 # user/dashboard routes
 
 def dashboard(request,  **kwargs):
-    def get_context_data(self, **kwargs):  # new
-        context = super().get_context_data(**kwargs)
-        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
-        return context
-
     if 'user_id' not in request.session:
         return redirect('/login')
     user = User.objects.get(id=request.session['user_id'])
