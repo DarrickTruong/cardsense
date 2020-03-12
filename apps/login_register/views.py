@@ -85,8 +85,7 @@ def process_setup(request):
     user.facebook = request.POST['facebook']
     user.instagram = request.POST['instagram']
     user.website = request.POST['website']
-    if 'profile_pic' in request.FILES:
-        user.profile_pic = request.FILES['profile_pic']
+    user.profile_pic = request.FILES['profile_pic']
     user.save()
     return redirect('/dashboard')
 
