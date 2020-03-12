@@ -9,7 +9,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'wall/css/master.css' %}">
     <link rel="stylesheet" href="{% static 'wall/css/bootstrap.css' %}">
-    <link rel="icon" href="{% static 'wall/images/favicon.ico' %}" type="image/png" sizes="16x16">
+    <!-- <link rel="icon" href="{% static 'wall/images/favicon.ico' %}" type="image/png" sizes="16x16"> -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -59,13 +59,7 @@
 
 
 
-
-
-
-
-
     <!-- USER CONTACT INFO COLUMN-->
-
     <div class="mt-5 row justify-content-around">
         <div class='col-lg-6 text-center'>
             <img class='mt-5 oval img-fluid' src="{{user.profile_pic.url}}" alt="{{user.first_name}} profile pic" width='300px'>
@@ -88,7 +82,6 @@
             </table>
 
             <!-- Social Buttons -->
-
             <div class='container text-center'>
 
                 <a href='https://www.linkedin.com/{{user.linkedin}}' class='btn btn-primary text-white block'>
@@ -102,10 +95,6 @@
                 <a href='https://www.instagram.com/{{user.instagram}}' class='btn btn-primary text-white block'>
                     <img class='logo' src="{% static 'wall/images/instagram.png' %}" alt='linkedin logo'>
                     <p class='logo_btn row_inline_block logo_font'>instagram</p>
-                </a>
-                <a href='https://www.linkedin.com/in/{{user.linkedin}}' class='btn btn-primary text-white block'>
-                    <img class='logo' src="{% static 'wall/images/google.png' %}" alt='linkedin logo'>
-                    <p class='logo_btn row_inline_block logo_font'>google</p>
                 </a>
 
             </div>

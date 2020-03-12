@@ -74,7 +74,7 @@ class UserManager(models.Manager):
         return errors
 
 
-profile_pics = FileSystemStorage(location='/media')
+profile_pics = FileSystemStorage(location='/static/media')
 
 class User(models.Model):
     first_name = models.CharField(max_length=45, blank=True)
