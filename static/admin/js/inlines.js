@@ -13,7 +13,7 @@
  * and modified for Django by Jannis Leidel, Travis Swicegood and Julien Phalip.
  *
  * Licensed under the New BSD License
- * See: https://opensource.org/licenses/bsd-license.php
+ * See: http://www.opensource.org/licenses/bsd-license.php
  */
 (function($) {
     'use strict';
@@ -44,21 +44,19 @@
             $(this).not("." + options.emptyCssClass).addClass(options.formCssClass);
         });
         if ($this.length && showAddButton) {
-            var addButton = options.addButton;
-            if (addButton === null) {
-                if ($this.prop("tagName") === "TR") {
-                    // If forms are laid out as table rows, insert the
-                    // "add" button in a new table row:
-                    var numCols = this.eq(-1).children().length;
-                    $parent.append('<tr class="' + options.addCssClass + '"><td colspan="' + numCols + '"><a href="#">' + options.addText + "</a></tr>");
-                    addButton = $parent.find("tr:last a");
-                } else {
-                    // Otherwise, insert it immediately after the last form:
-                    $this.filter(":last").after('<div class="' + options.addCssClass + '"><a href="#">' + options.addText + "</a></div>");
-                    addButton = $this.filter(":last").next().find("a");
-                }
+            var addButton;
+            if ($this.prop("tagName") === "TR") {
+                // If forms are laid out as table rows, insert the
+                // "add" button in a new table row:
+                var numCols = this.eq(-1).children().length;
+                $parent.append('<tr class="' + options.addCssClass + '"><td colspan="' + numCols + '"><a href="#">' + options.addText + "</a></tr>");
+                addButton = $parent.find("tr:last a");
+            } else {
+                // Otherwise, insert it immediately after the last form:
+                $this.filter(":last").after('<div class="' + options.addCssClass + '"><a href="#">' + options.addText + "</a></div>");
+                addButton = $this.filter(":last").next().find("a");
             }
-            addButton.on('click', function(e) {
+            addButton.click(function(e) {
                 e.preventDefault();
                 var template = $("#" + options.prefix + "-empty");
                 var row = template.clone(true);
@@ -91,7 +89,7 @@
                     addButton.parent().hide();
                 }
                 // The delete button of each row triggers a bunch of other things
-                row.find("a." + options.deleteCssClass).on('click', function(e1) {
+                row.find("a." + options.deleteCssClass).click(function(e1) {
                     e1.preventDefault();
                     // Remove the parent form containing this button:
                     row.remove();
@@ -139,16 +137,15 @@
         emptyCssClass: "empty-row",    // CSS class applied to the empty row
         formCssClass: "dynamic-form",  // CSS class applied to each form in a formset
         added: null,          // Function called each time a new form is added
-        removed: null,          // Function called each time a form is deleted
-        addButton: null       // Existing add button to use
+        removed: null          // Function called each time a form is deleted
     };
 
 
     // Tabular inlines ---------------------------------------------------------
-    $.fn.tabularFormset = function(selector, options) {
+    $.fn.tabularFormset = function(options) {
         var $rows = $(this);
         var alternatingRows = function(row) {
-            $(selector).not(".add-row").removeClass("row1 row2")
+            $($rows.selector).not(".add-row").removeClass("row1 row2")
             .filter(":even").addClass("row1").end()
             .filter(":odd").addClass("row2");
         };
@@ -204,18 +201,17 @@
                 reinitDateTimeShortCuts();
                 updateSelectFilter();
                 alternatingRows(row);
-            },
-            addButton: options.addButton
+            }
         });
 
         return $rows;
     };
 
     // Stacked inlines ---------------------------------------------------------
-    $.fn.stackedFormset = function(selector, options) {
+    $.fn.stackedFormset = function(options) {
         var $rows = $(this);
         var updateInlineLabel = function(row) {
-            $(selector).find(".inline_label").each(function(i) {
+            $($rows.selector).find(".inline_label").each(function(i) {
                 var count = i + 1;
                 $(this).html($(this).html().replace(/(#\d+)/g, "#" + count));
             });
@@ -271,8 +267,7 @@
                 reinitDateTimeShortCuts();
                 updateSelectFilter();
                 updateInlineLabel(row);
-            },
-            addButton: options.addButton
+            }
         });
 
         return $rows;
@@ -281,16 +276,13 @@
     $(document).ready(function() {
         $(".js-inline-admin-formset").each(function() {
             var data = $(this).data(),
-                inlineOptions = data.inlineFormset,
-                selector;
+                inlineOptions = data.inlineFormset;
             switch(data.inlineType) {
             case "stacked":
-                selector = inlineOptions.name + "-group .inline-related";
-                $(selector).stackedFormset(selector, inlineOptions.options);
+                $(inlineOptions.name + "-group .inline-related").stackedFormset(inlineOptions.options);
                 break;
             case "tabular":
-                selector = inlineOptions.name + "-group .tabular.inline-related tbody:first > tr";
-                $(selector).tabularFormset(selector, inlineOptions.options);
+                $(inlineOptions.name + "-group .tabular.inline-related tbody tr").tabularFormset(inlineOptions.options);
                 break;
             }
         });
