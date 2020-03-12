@@ -25,9 +25,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = '6rmytx2dc#oz2#bhlo%_-76(ptq2igildrux5wc6f-2ou^-b13'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['52.53.180.33']
 
 
 # Application definition
