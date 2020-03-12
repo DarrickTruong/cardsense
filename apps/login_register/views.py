@@ -82,6 +82,3 @@ def process_setup(request):
     user.profile_pic = request.FILES['profile_pic']
     user.save()
     return redirect('/dashboard')
-
-
-
