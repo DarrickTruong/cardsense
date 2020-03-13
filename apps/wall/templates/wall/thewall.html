@@ -16,9 +16,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
@@ -29,8 +32,9 @@
     <nav class=" navbar navbar-expand-lg navbar-light bg-primary fixed-top">
         <a class=" navbar-brand" href="/">CardSense</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -38,17 +42,20 @@
             <ul class=" navbar-nav">
 
                 <li class="nav-item active">
-                    <a href='/write_message/{{user.id}}' class='m-1 nav-link btn btn-light text-secondary'> Message
+                    <a href='/write_message/{{user.id}}'
+                        class='m-1 nav-link btn btn-light text-secondary'> Message
                         {{user.first_name}}</a>
                 </li>
 
                 <li class="nav-item active">
-                    <a href='/write_review/{{user.id}}' class='m-1 nav-link text-secondary btn btn-light'> Write a
+                    <a href='/write_review/{{user.id}}'
+                        class='m-1 nav-link text-secondary btn btn-light'> Write a
                         review</a>
                 </li>
                 {% if id == session_id.user_id  %}
                 <li>
-                    <a href='/dashboard' class='m-1 nav-link btn btn-secondary text-white'> Back to dashboard </a>
+                    <a href='/dashboard' class='m-1 nav-link btn btn-secondary text-white'> Back to
+                        dashboard </a>
                 </li>
                 {% endif %}
 
@@ -62,7 +69,8 @@
     <!-- USER CONTACT INFO COLUMN-->
     <div class="mt-5 row justify-content-around">
         <div class='col-lg-6 text-center'>
-            <img class='mt-5 oval img-fluid' src="{{user.profile_pic.url}}" alt="{{user.first_name}} profile pic" width='300px'>
+            <img class='mt-5 oval img-fluid' src="{{user.profile_pic.url}}"
+                alt="{{user.first_name}} profile pic" width='300px'>
 
             <table class='table table-striped mt-3'>
                 <tr>
@@ -84,16 +92,22 @@
             <!-- Social Buttons -->
             <div class='container text-center'>
 
-                <a href='https://www.linkedin.com/{{user.linkedin}}' class='btn btn-primary text-white block'>
-                    <img class='logo' src="{% static 'wall/images/linkedin.png' %}" alt='linkedin logo'>
+                <a href='https://www.linkedin.com/{{user.linkedin}}'
+                    class='btn btn-primary text-white block'>
+                    <img class='logo' src="{% static 'wall/images/linkedin.png' %}"
+                        alt='linkedin logo'>
                     <p class='logo_btn row_inline_block logo_font'>Linkedin</p>
                 </a>
-                <a href='https://www.facebook.com/{{user.facebook}}' class='btn btn-primary text-white block'>
-                    <img class='logo' src="{% static 'wall/images/facebook.png' %}" alt='facebook logo'>
+                <a href='https://www.facebook.com/{{user.facebook}}'
+                    class='btn btn-primary text-white block'>
+                    <img class='logo' src="{% static 'wall/images/facebook.png' %}"
+                        alt='facebook logo'>
                     <p class='logo_btn row_inline_block logo_font'>facebook</p>
                 </a>
-                <a href='https://www.instagram.com/{{user.instagram}}' class='btn btn-primary text-white block'>
-                    <img class='logo' src="{% static 'wall/images/instagram.png' %}" alt='linkedin logo'>
+                <a href='https://www.instagram.com/{{user.instagram}}'
+                    class='btn btn-primary text-white block'>
+                    <img class='logo' src="{% static 'wall/images/instagram.png' %}"
+                        alt='linkedin logo'>
                     <p class='logo_btn row_inline_block logo_font'>instagram</p>
                 </a>
 
@@ -148,12 +162,18 @@
     <div class='container p-3 border border-primary rounded bg-lightgrey'>
 
         <!-- Reviews -->
-        <h5 class='offset-1'> Reviews </h5>
+        <div class="mb-2">
+            <img class="icon inline-block" src="{% static 'wall/images/paper.png' %}">
+            <h5 class='inline-block'> Reviews </h5>
+            <a class="mobile-btn" href="/write_review/{{user.id}}"><button
+                    class="btn btn-sm btn-primary">Write a Review</button></a>
+        </div>
         <div class='wrapper screenscroll_med rounded'>
 
             {% for review in reviews reversed %}
             <div class='border rounded p-2 bg-light'>
-                <h6 class='row_inline_block'> {{review.author.first_name}} {{review.author.last_name}} </h6>
+                <h6 class='row_inline_block'> {{review.author.first_name}}
+                    {{review.author.last_name}} </h6>
                 <p class='row_inline_block'> {{review.created_at}} </p>
                 <p> {{review.review}}</p>
             </div>
@@ -170,19 +190,25 @@
         <div>
             <img class="icon inline-block" src="{% static 'wall/images/push-pin.png' %}">
             <h5 class="inline-block"> Pinned Messages </h5>
+            <a class="mobile-btn" href="/write_message/{{user.id}}"><button
+                    class="btn btn-sm btn-primary">Write a
+                    Message</button></a>
+
             <!-- Pinned Messages -->
             {% for pinned in user_messages %}
             <div class='border rounded mt-2 p-3'>
 
                 {% if id == session_id.user_id  %}
-                <a href='/unpin_message/{{pinned.id}}' class='row_inline_block btn btn-outline-danger btn-sm text-red'>
+                <a href='/unpin_message/{{pinned.id}}'
+                    class='row_inline_block btn btn-outline-danger btn-sm text-red'>
                     remove </a>
                 {% else %}
-                <img class='row_inline_block' src="{% static 'wall/images/push-pin.png' %}" alt='push pin' height='20px'
-                    width="20px">
+                <img class='row_inline_block' src="{% static 'wall/images/push-pin.png' %}"
+                    alt='push pin' height='20px' width="20px">
                 {% endif %}
 
-                <p class='row_inline_block rounded border p-1 bg-light'> {{pinned.author.first_name}}:
+                <p class='row_inline_block rounded border p-1 bg-light'>
+                    {{pinned.author.first_name}}:
                     {{pinned.message}} </p>
 
                 {% for comment in pinned.comments.all %}

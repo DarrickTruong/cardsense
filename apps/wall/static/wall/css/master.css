@@ -1,40 +1,4 @@
-@media only screen and (max-width: 700px) {
-    div.heroinfo {
-        width: 100vw;
-    }
-    div.heroinfo h1{
-        font-size: 30px;
-        text-align: center;
-    }
-    div#popup {
-        height: 400px;
-        width: 80vw;
-        background-color: whitesmoke;
-        position: relative;
-        top: 5%;
-        left: 5%;
-        box-shadow: 8px 5px 2px 1px rgba(48, 48, 49, 0.315);
-        padding: 50px;
-        text-align: left;
-        font-size: larger;
-        }
-    div.businessimg {
-        height: 60vh;
-    }
-    div.parallax2 {
-        background-size: cover;
-    }
-    table.messages {
-        font-size: smaller;
-    }
-    div#upgradeOptions {
-        position: absolute;
-        top: 35%;
-        left: 10%;
-        width: 80vw;
-        z-index: 1;
-    }
-}
+
 
 .gradient {
     background: linear-gradient(90deg, rgba(21,127,251) 0%, rgba(151,20,255,1) 100%);
@@ -296,4 +260,51 @@ nav.icon {
     box-shadow: 8px 5px 2px 1px rgba(48, 48, 49, 0.315);
     padding: 50px;
     text-align: left;
+}
+
+.mobile-btn {
+    visibility: hidden;
+}
+
+@media screen and (max-width: 700px) {
+    div.heroinfo {
+        width: 100vw;
+    }
+    div.heroinfo h1{
+        font-size: 30px;
+        text-align: center;
+    }
+    div#popup {
+        height: 400px;
+        width: 80vw;
+        background-color: whitesmoke;
+        position: relative;
+        top: 5%;
+        left: 5%;
+        box-shadow: 8px 5px 2px 1px rgba(48, 48, 49, 0.315);
+        padding: 50px;
+        text-align: left;
+        font-size: larger;
+        }
+    div.businessimg {
+        height: 60vh;
+    }
+    div.parallax2 {
+        background-size: cover;
+    }
+    table.messages {
+        font-size: smaller;
+    }
+    div#upgradeOptions {
+        position: absolute;
+        top: 35%;
+        left: 10%;
+        width: 80vw;
+        z-index: 1;
+    }
+    .mobile-btn {
+        visibility: visible;
+        position: absolute;
+        right: 5%;
+    }
 }
