@@ -126,6 +126,11 @@
                 </tr>
                 {% endfor %}
             </table>
+            {% if not my_messages %}
+            <div class="empty-box">
+                <h5> You currently have zero messages. </h5>
+            </div>
+            {% endif %}
         </div>
 
 
@@ -136,6 +141,7 @@
             <div class='row justify-content-around'>
                 <div class='col-lg-6'>
                     <h5> Create an Event </h5>
+                    <!-- Event Form Validation -->
                     {% if messages %}
                     {% for message in messages %}
                             <p class="text-danger">{{ message }}</li>
@@ -193,6 +199,11 @@
                 <div class='col-lg-6'>
                     <h5> My Events</h5>
                     <div class='screenscroll'>
+                        {% if not events %}
+                        <div class="empty-box">
+                            <h5> Post events to generate more interest and to make your page look more attractive! </h5>
+                        </div>
+                        {% endif %}
                         {% for event in events %}
                         <table class='table table-sm table-striped table-active'>
                             <tr>
@@ -282,6 +293,11 @@
                     </tr>
                     {% endfor %}
                 </table>
+                {% if not leads %}
+                <div class="empty-box">
+                    <h5> You currently have zero leads. Make sure you have at least one event post on the calendar. </h5>
+                </div>
+                {% endif %}
             </div>
 
             <div class='col-lg-6 screenscroll'>
@@ -308,6 +324,11 @@
                     </tr>
                     {% endfor %}
                 </table>
+                {% if not loyalty %}
+                <div class="empty-box">
+                    <h5> Convert your leads into the loyalty category. Keep working hard! </h5>
+                </div>
+                {% endif %}
             </div>
         </div>
 
@@ -351,6 +372,11 @@
                 </tr>
                 {% endfor %}
             </table>
+            {% if not reviews %}
+            <div class="empty-box">
+                <h5> Have you reached out to the people on your loyalty group? </h5>
+            </div>
+            {% endif %}
         </div>
     </div>
 

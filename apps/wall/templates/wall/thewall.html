@@ -118,9 +118,16 @@
         <!-- EVENTS COLUMN -->
         <div class='col-lg-6'>
             <div class="mt-5 container">
-                <h5> Events </h5>
+                <img class="icon inline-block" src="{% static 'wall/images/calendar.png' %}" alt="calendar image">
+                <h5 class="inline-block"> Events </h5>
                 <div class='container'>
                     <div class='screenscroll_tall'>
+                        {% if not events %}
+                        <div class="empty-box">
+                            <h5> {{user.first_name}} has not posted any events. Send {{user.first_name}} a message to see when the next event is happening.  </h5>
+                        </div>
+                        {% endif %}
+                        
                         {% for event in events %}
 
                         <table class='table table-sm'>
@@ -163,12 +170,16 @@
 
         <!-- Reviews -->
         <div class="mb-2">
-            <img class="icon inline-block" src="{% static 'wall/images/paper.png' %}">
+            <img class="icon inline-block" src="{% static 'wall/images/paper.png' %}" alt="paper image">
             <h5 class='inline-block'> Reviews </h5>
             <a class="mobile-btn" href="/write_review/{{user.id}}"><button
                     class="btn btn-sm btn-primary">Write a Review</button></a>
         </div>
+
         <div class='wrapper screenscroll_med rounded'>
+            {% if not reviews %}
+            <h5>Be the first to write a review. {{user.first_name}} will really appreciate you!</h5>
+            {% endif %}
 
             {% for review in reviews reversed %}
             <div class='border rounded p-2 bg-light'>
@@ -188,16 +199,20 @@
         <div class='line_divider'></div>
 
         <div>
-            <img class="icon inline-block" src="{% static 'wall/images/push-pin.png' %}">
+            <img class="icon inline-block" src="{% static 'wall/images/push-pin.png' %}" alt="push-pin image">
             <h5 class="inline-block"> Pinned Messages </h5>
             <a class="mobile-btn" href="/write_message/{{user.id}}"><button
                     class="btn btn-sm btn-primary">Write a
                     Message</button></a>
 
             <!-- Pinned Messages -->
-            {% for pinned in user_messages %}
-            <div class='border rounded mt-2 p-3'>
+            <div class='wrapper screenscroll_med border rounded mt-2 p-3'>
+                {% if not user_messages %}
+                <h5>There are currently no pinned messages.
+                </h5>
+                {% endif %}
 
+                {% for pinned in user_messages %}
                 {% if id == session_id.user_id  %}
                 <a href='/unpin_message/{{pinned.id}}'
                     class='row_inline_block btn btn-outline-danger btn-sm text-red'>
