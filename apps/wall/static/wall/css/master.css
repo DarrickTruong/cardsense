@@ -1,4 +1,7 @@
 @media only screen and (max-width: 700px) {
+    div.heroinfo {
+        width: 100vw;
+    }
     div.heroinfo h1{
         font-size: 30px;
         text-align: center;
@@ -67,7 +70,7 @@
 }
 
 .wrapper {
-    width: 80%;
+    width: 90%;
     border: 1px solid lightgray;
     margin: auto;
     padding: 15px;
@@ -182,7 +185,8 @@ a.block {
 
 .screenscroll_med {
     overflow: scroll;
-    height: 500px; 
+    min-height: 200px;
+    max-height: 500px; 
    
 }
 
