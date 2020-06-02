@@ -185,7 +185,7 @@
             <div class='border rounded p-2 bg-light'>
                 <h6 class='row_inline_block'> {{review.author.first_name}}
                     {{review.author.last_name}} </h6>
-                <p class='row_inline_block'> {{review.created_at}} </p>
+                <p class='row_inline_block'> {{ review.created_at|date:"M-d-Y" }} </p>
                 <p> {{review.review}}</p>
             </div>
 
@@ -248,6 +248,10 @@
 
 
     </div>
+
+    <script>
+        console.log()
+    </script>
 </body>
 
 </html>
